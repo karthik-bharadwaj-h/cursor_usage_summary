@@ -1,0 +1,91 @@
+{
+  "name": "cursor-usage-summary",
+  "displayName": "Cursor Usage Summary",
+  "publisher": "Karthik Halagur Bharadwaj",
+  "author": {
+    "name": "Karthik Halagur Bharadwaj"
+  },
+  "description": "Display individual usage in status bar and detailed team vs pooled usage on click",
+  "version": "1.0.0",
+  "icon": "assets/icon.png",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+    "activationEvents": [
+      "onStartupFinished"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/karthik-bharadwaj-h/cursor_usage_summary.git"
+    },
+    "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cursorUsageSummary.showUsageDetails",
+        "title": "Show Usage Details"
+      },
+      {
+        "command": "cursorUsageSummary.testConnectivity",
+        "title": "Test API Connectivity"
+      },
+      {
+        "command": "cursorUsageSummary.configureToken",
+        "title": "Configure API Token"
+      }
+    ],
+    "configuration": {
+      "title": "Cursor Usage Summary Configuration",
+      "properties": {
+        "cursorUsageSummary.apiToken": {
+          "type": "string",
+          "description": "Your Cursor authentication token. Use one of these formats: (1) Full cookie: 'WorkosCursorSessionToken=user_01...::eyJ...' OR (2) Just the token value: 'user_01...::eyJ...'. To get this, open cursor.com in your browser, press F12, go to Application > Cookies > https://cursor.com, and copy the WorkosCursorSessionToken value.",
+          "scope": "window"
+        },
+        "cursorUsageSummary.proxy": {
+          "type": "string",
+          "description": "Proxy URL to use for API requests (e.g., http://your-proxy:8080). If not set, will auto-detect from environment variables (https_proxy, http_proxy).",
+          "scope": "window"
+        },
+        "cursorUsageSummary.statusBarAlignment": {
+          "type": "string",
+          "enum": [
+            "Left",
+            "Right"
+          ],
+          "default": "Right",
+          "description": "Alignment of the status bar item.",
+          "scope": "window"
+        },
+        "cursorUsageSummary.statusBarPriority": {
+          "type": "number",
+          "default": 100,
+          "description": "Priority of the status bar item. Higher values move it to the left (for Right alignment) or right (for Left alignment).",
+          "scope": "window"
+        },
+        "cursorUsageSummary.compactMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "If enabled, shows a more compact status bar item (just icon and percentage).",
+          "scope": "window"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "https-proxy-agent": "^5.0.0"
+  }
+}
