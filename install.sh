@@ -76,12 +76,38 @@ fi
 
 echo ""
 echo "✅ Build completed successfully!"
+    echo "=========================================="
+
+# Check if vsce is installed and install if not
+echo ""
+echo "⚙️ Checking vsce (Visual Studio Code Extension Manager) installation..."
+if ! command_exists vsce; then
+    echo "  vsce not found. Installing globally..."
+    npm install -g vsce
+    if ! command_exists vsce; then
+        echo "❌ vsce installation failed. Please install manually: npm install -g vsce"
+        exit 1
+    fi
+    echo "  vsce installed successfully."
+else
+    echo "  vsce is already installed."
+fi
+
+# Package the extension
+echo ""
+echo "📦 Packaging extension into .vsix file..."
+vsce package --out ./cursor-usage-summary.vsix
+echo "✅ Extension packaged into: ./cursor-usage-summary.vsix"
+
 echo ""
 echo "📋 Next steps:"
-echo "  1. Open Cursor"
-echo "  2. Press Ctrl+Shift+P (or Cmd+Shift+P on Mac)"
-echo "  3. Type 'Developer: Reload Window' and run it"
-echo "  4. Configure your API token by running 'Configure API Token' command"
+echo "  1. **Install the .vsix file in Cursor:**"
+echo "     - Open Cursor"
+echo "     - Press Ctrl+Shift+P (or Cmd+Shift+P on Mac) to open the Command Palette"
+echo "     - Type 'Extensions: Install from VSIX...' and select it"
+echo "     - Navigate to this project directory, select 'cursor-usage-summary.vsix' and click Install."
+echo "  2. Restart Cursor (if prompted or if you experience issues)."
+echo "  3. Configure your API token by running 'Configure API Token' command (Ctrl+Shift+P -> Configure API Token)."
 echo ""
-echo "🔗 For setup instructions, see README.md"
+echo "🔗 For general setup instructions, see README.md"
 echo "=========================================="
