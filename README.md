@@ -58,6 +58,10 @@ Example token format:
 - **Status Bar Priority** (`cursorUsageSummary.statusBarPriority`): Higher values move it towards the center/left.
 - **Compact Mode** (`cursorUsageSummary.compactMode`): Show only icon and percentage to save space.
 
+## Screenshots
+ <img src="images/screenshot1.png" width="400" alt="Screenshot1"/>
+ <img src="images/screenshot2.png" width="400" alt="Screenshot2"/>
+
 ## Troubleshooting
 
 - **Redirect loop detected**: Your token is likely invalid or expired. Get a fresh token from cursor.com.
